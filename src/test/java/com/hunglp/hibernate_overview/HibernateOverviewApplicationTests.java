@@ -8,6 +8,7 @@ import com.hunglp.hibernate_overview.entity.one_to_one.Address;
 import com.hunglp.hibernate_overview.entity.one_to_one.User;
 import com.hunglp.hibernate_overview.entity.one_to_one_join_column.Staff;
 import com.hunglp.hibernate_overview.entity.one_to_one_join_column.WorkStation;
+import com.hunglp.hibernate_overview.entity.one_to_one_share_primary_key.*;
 import com.hunglp.hibernate_overview.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ class HibernateOverviewApplicationTests {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private DeveloperRepository developerRepository;
 
     @Test
     void contextLoads() {
@@ -63,6 +67,18 @@ class HibernateOverviewApplicationTests {
         staff_2.setWorkStation(d11_cmc);
 
         staffRepository.saveAll(List.of(staff_1, staff_2));
+    }
+
+    // ONE TO ONE SHARE PRIMARY KEY
+    @Test
+    public void createDeveloperWithAccountGit(){
+
+        AccountGit accountGit = new AccountGit("123456789");
+
+        Developer developer = new Developer("Hung","Le");
+        developer.setAccount(accountGit);
+
+        developerRepository.save(developer);
     }
 
     // ---------------------------------   ONE TO MANY -----------------------------------------------
